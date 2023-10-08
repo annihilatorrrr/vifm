@@ -44,7 +44,7 @@ def list(args):
         output = subprocess.check_output(
             [DISKUTIL, "list", "-plist"])
     except subprocess.CalledProcessError:
-        print("Failed to execute '{}'".format(DISKUTIL), file=sys.stderr)
+        print(f"Failed to execute '{DISKUTIL}'", file=sys.stderr)
         return(1)
     root = plistlib.readPlistFromString(output)
     for disk in root["AllDisksAndPartitions"]:
@@ -78,7 +78,7 @@ def mount(args):
     try:
         subprocess.check_call([DISKUTIL, "mount", device])
     except OSError:
-        print("Failed to execute {}".format(DISKUTIL), file=sys.stderr)
+        print(f"Failed to execute {DISKUTIL}", file=sys.stderr)
         return(1)
     except subprocess.CalledProcessError:
         # Trust diskutil to have output a useful error message
@@ -91,7 +91,7 @@ def unmount(args):
     try:
         subprocess.check_call([DISKUTIL, "unmount", path])
     except OSError:
-        print("Failed to execute {}".format(DISKUTIL), file=sys.stderr)
+        print(f"Failed to execute {DISKUTIL}", file=sys.stderr)
         return(1)
     except subprocess.CalledProcessError:
         # Trust diskutil to have output a useful error message
